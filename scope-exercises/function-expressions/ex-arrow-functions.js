@@ -4,7 +4,7 @@
  * Print the student records sorted name for the given ids
  * @param {array} recordIds array if numbers. Each number is an student id
  */
-function printRecords(recordIds) {
+const printRecords = (recordIds) => {
   const recordsEnrolled = studentRecords.filter((record) =>
     recordIds.includes(record.id)
   );
@@ -18,43 +18,44 @@ function printRecords(recordIds) {
       `${record.name} (${record.id}): ${record.paid ? 'Paid' : 'Not Paid'}`
     )
   );
-}
+};
 
 /*************************************************************** */
 
-function getRecordIds(records) {
+const getRecordIds = (records) => {
   return records.map(function getId(record) {
     return record.id;
   });
-}
+};
 
-function recordsPaidAndNotEnrolled() {
+const recordsPaidAndNotEnrolled = () => {
   const recordsFiltered = studentRecords.filter(
     (record) => record.paid && !currentEnrollment.includes(record.id)
   );
   return getRecordIds(recordsFiltered);
-}
-function recordsEnrolled() {
+};
+const recordsEnrolled = () => {
   const recordsFiltered = studentRecords.filter((record) =>
     currentEnrollment.includes(record.id)
   );
   return getRecordIds(recordsFiltered);
-}
+};
 
 /**
  * Describe the enrolled students and also the students which have paid and but not yet enrolled
  * @returns {array} each element represent an student record
  */
-function paidStudentsToEnroll() {
-  return [...recordsPaidAndNotEnrolled(), ...recordsEnrolled()];
-}
+const paidStudentsToEnroll = () => [
+  ...recordsPaidAndNotEnrolled(),
+  ...recordsEnrolled(),
+];
 
 /******************************************* */
 
-function remindUnpaid(recordIds) {
+const remindUnpaid = (recordIds) => {
   const unpaidStudents = studentRecords.filter((record) => !record.paid);
   printRecords(getRecordIds(unpaidStudents));
-}
+};
 
 // ********************************
 
@@ -80,19 +81,19 @@ console.log('----');
 remindUnpaid(currentEnrollment);
 
 /*
-      Bob (664): Not Paid
-      Henry (105): Not Paid
-      Sarah (375): Paid
-      Suzy (410): Paid
-      ----
-      Bob (664): Not Paid -- --
-      Frank (313): Paid
-      Henry (105): Not Paid --
-      Mary (502): Paid
-      Peter (250): Paid 
-      Sarah (375): Paid --
-      Suzy (410): Paid --
-      ----
-      Bob (664): Not Paid
-      Henry (105): Not Paid
-  */
+        Bob (664): Not Paid
+        Henry (105): Not Paid
+        Sarah (375): Paid
+        Suzy (410): Paid
+        ----
+        Bob (664): Not Paid -- --
+        Frank (313): Paid
+        Henry (105): Not Paid --
+        Mary (502): Paid
+        Peter (250): Paid 
+        Sarah (375): Paid --
+        Suzy (410): Paid --
+        ----
+        Bob (664): Not Paid
+        Henry (105): Not Paid
+    */
